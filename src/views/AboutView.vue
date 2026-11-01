@@ -3,7 +3,7 @@
     <h1 class="panel-title">
       About author
     </h1><p class="mb-3 text-sm">
-      Benswors
+      Семенко Володимир Анатолійович
     </p><h2 class="mb-2 text-sm font-semibold">
       Technical skills
     </h2><p class="mb-3 text-sm text-gray-500">
