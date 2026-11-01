@@ -5,8 +5,6 @@ const DEBOUNCE_MS = 300
 
 const emit = defineEmits<{ 'filter-by-name': [value: string] }>()
 const query = ref('')
-
-// Передача події з затримкою (debounce) 300 мс
 watch(query, (value, _old, onCleanup) => {
   const timer = setTimeout(() => emit('filter-by-name', value.trim()), DEBOUNCE_MS)
   onCleanup(() => clearTimeout(timer))

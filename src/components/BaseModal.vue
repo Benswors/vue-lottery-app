@@ -5,8 +5,6 @@ const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{ close: [] }>()
 
 const dialog = useTemplateRef<HTMLElement>('dialog')
-
-// Фокус на вікні, щоб ключовий модифікатор .esc отримував події клавіатури
 watch(
   () => props.open,
   async (isOpen) => {

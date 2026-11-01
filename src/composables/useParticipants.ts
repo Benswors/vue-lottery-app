@@ -25,7 +25,6 @@ function createId(): string {
 }
 
 export function useParticipants() {
-  // Відновлення при завантаженні застосунку
   const stored = readStorage<unknown[]>(PARTICIPANTS_KEY, [])
   const storedParticipants = Array.isArray(stored) ? stored.filter(isParticipant) : []
   const participants = ref<Participant[]>(storedParticipants)
@@ -37,8 +36,6 @@ export function useParticipants() {
       .filter((id): id is string => typeof id === 'string' && knownIds.has(id))
       .slice(0, MAX_WINNERS),
   )
-
-  // Збереження за допомогою watcher з опцією deep
   watch(
     participants,
     (value) => localStorage.setItem(PARTICIPANTS_KEY, JSON.stringify(value)),

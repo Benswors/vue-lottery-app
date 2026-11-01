@@ -11,7 +11,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "vue": "^3.5.43"
+    "pinia": "^4.1.0",
+    "vee-validate": "^4.15.1",
+    "vue": "^3.5.43",
+    "vue-router": "^4.6.4",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

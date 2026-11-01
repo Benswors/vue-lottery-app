@@ -47,8 +47,6 @@ const errors = computed<Record<Field, string | null>>(() => ({
 }))
 
 const isValid = computed(() => FIELDS.every((field) => errors.value[field] === null))
-
-// Помилка показується лише для полів, з якими користувач вже взаємодіяв
 function visibleError(field: Field): string | null {
   return touched[field] ? errors.value[field] : null
 }
@@ -67,8 +65,6 @@ function onSubmit(): void {
     phone: values.phone.trim(),
   })
 }
-
-// Очищення без спрацювання валідації: скидаємо і значення, і прапорці "touched"
 function reset(): void {
   Object.assign(values, emptyValues())
   FIELDS.forEach((field) => {

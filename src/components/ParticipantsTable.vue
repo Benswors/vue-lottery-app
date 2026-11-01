@@ -14,8 +14,6 @@ const emit = defineEmits<{
 const nameFilter = ref('')
 const sortKey = ref<SortKey | null>(null)
 const sortDirection = ref<SortDirection>('asc')
-
-// Спочатку фільтрація, потім сортування. Вихідний масив не мутується.
 const visibleParticipants = computed<Participant[]>(() => {
   const query = nameFilter.value.toLowerCase()
   const filtered = props.participants.filter((p) => p.name.toLowerCase().includes(query))

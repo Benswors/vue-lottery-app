@@ -1,17 +1,37 @@
 # vue-lottery-app
 
-Лабораторна робота №4: застосунок-лотерея на Vue 3 + TypeScript (Composition API) + Tailwind CSS + SCSS.
+Vue 3 + TypeScript + Vue Router + Pinia.
 
 ## Запуск
+
 ```bash
-npm install
-npm run dev        # режим розробки
-npm run lint       # ESLint
-npm run type-check # перевірка типів
-npm run build      # продакшн-збірка
+npm ci
+cp .env.example .env
+npm run dev
 ```
 
-## Структура
-- `src/components` — BaseButton, BaseInput, WinnerItem, WinnersList, RegisterFormBlock, ParticipantForm, ParticipantsTable, SearchBar, BaseModal
-- `src/composables/useParticipants.ts` — стан, localStorage (watch deep), вибір переможців
-- `src/utils/validation.ts` — regexp та правила валідації
+PowerShell: `Copy-Item .env.example .env`.
+
+## Перевірка
+
+```bash
+npm run lint
+npm run type-check
+npm run build
+```
+
+## Налаштування
+
+`VITE_API_URL` - адреса API. `VITE_BASE_PATH` - базовий шлях застосунку.
+Локальний `.env` не зберігається в Git.
+
+## Сторінки
+
+Home - лотерея. Users - список користувачів, пошук, профілі та реєстрація.
+Login - вхід до Users. About author - автор проєкту.
+
+Обліковий запис: `emilys` / `emilyspass`.
+
+## Деплой
+
+Push у `feature/routing` запускає збірку та публікацію в `gh-pages`.
