@@ -67,6 +67,28 @@ function isEmailTakenByOther(email: string): boolean {
       @edit="openEdit"
       @delete="openDelete"
     />
+    <section class="rounded border border-gray-200 bg-white p-4 shadow-sm">
+      <h2 class="mb-2 text-sm font-bold uppercase text-gray-900">
+        Про застосунок
+      </h2>
+      <p class="mb-3 text-sm text-gray-500">
+        Lottery — застосунок для реєстрації учасників і випадкового вибору переможців.
+        У розділі Users можна шукати користувачів, переглядати їхні профілі,
+        додавати, редагувати та видаляти записи після входу.
+      </p>
+      <p class="mb-3 text-sm text-gray-500">
+        Технології: Vue 3, TypeScript, Composition API, Vue Router, Pinia,
+        VeeValidate, yup, Tailwind CSS, SCSS та REST API DummyJSON.
+      </p>
+      <a
+        href="https://github.com/Benswors/vue-lottery-app"
+        class="text-sm text-primary hover:text-primary-dark hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub проєкту
+      </a>
+    </section>
   </div>
 
   <BaseModal
