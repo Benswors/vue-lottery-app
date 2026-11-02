@@ -1,0 +1,1 @@
+import{D as e,_ as t,at as n,c as r}from"./runtime-core.esm-bundler-BKPaD_mQ.js";import{n as i}from"./user-form-DAySTJj-.js";var a=t({__name:`UserCreatePage`,setup(t){return(t,a)=>(e(),r(n(i)))}});export{a as UserCreatePage};

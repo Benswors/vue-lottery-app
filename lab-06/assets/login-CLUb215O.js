@@ -1,0 +1,1 @@
+import{D as e,_ as t,at as n,c as r}from"./runtime-core.esm-bundler-BKPaD_mQ.js";import{a as i}from"./index-BsdvxvQd.js";var a=t({__name:`LoginPage`,setup(t){return(t,a)=>(e(),r(n(i)))}});export{a as LoginPage};

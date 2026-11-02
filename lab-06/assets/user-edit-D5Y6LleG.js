@@ -1,0 +1,1 @@
+import{D as e,_ as t,at as n,c as r}from"./runtime-core.esm-bundler-BKPaD_mQ.js";import{t as i}from"./user-form-DAySTJj-.js";var a=t({__name:`UserEditPage`,props:{id:{}},setup(t){return(a,o)=>(e(),r(n(i),{id:t.id},null,8,[`id`]))}});export{a as UserEditPage};
