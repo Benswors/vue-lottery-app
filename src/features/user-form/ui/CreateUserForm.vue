@@ -7,7 +7,7 @@ import type { CreateUserDto } from '@/entities/user'
 const store = useUsersStore(), router = useRouter(), busy = ref(false), error = ref('')
 async function save(data: CreateUserDto) {
   busy.value = true; error.value = ''
-  try { await store.create(data); await router.push('/users') }
+  try { await store.createUser(data); await router.push('/users') }
   catch (e) { error.value = (e as Error).message } finally { busy.value = false }
 }
 </script>

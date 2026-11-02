@@ -1,4 +1,5 @@
 import { computed, ref, watch } from 'vue'
+import { defineStore } from 'pinia'
 import type { Participant, ParticipantInput } from './types'
 
 const PARTICIPANTS_KEY = 'vue-lottery-app:participants'
@@ -24,7 +25,7 @@ function createId(): string {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
-export function useParticipants() {
+export const useLotteryStore = defineStore('lottery', () => {
   const stored = readStorage<unknown[]>(PARTICIPANTS_KEY, [])
   const storedParticipants = Array.isArray(stored) ? stored.filter(isParticipant) : []
   const participants = ref<Participant[]>(storedParticipants)
@@ -104,4 +105,4 @@ export function useParticipants() {
     pickWinner,
     removeWinner,
   }
-}
+})

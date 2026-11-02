@@ -6,11 +6,11 @@ import { useUsersStore } from '@/entities/user'
 import type { User, CreateUserDto, UpdateUserDto } from '@/entities/user'
 const props = defineProps<{ id: string }>()
 const store = useUsersStore(), router = useRouter(), user = ref<User>(), busy = ref(false), error = ref('')
-watch(() => props.id, async id => { user.value = undefined; error.value = ''; try { user.value = await store.get(Number(id)) } catch (e) { error.value = (e as Error).message } }, { immediate: true })
+watch(() => props.id, async id => { user.value = undefined; error.value = ''; try { user.value = await store.fetchUser(Number(id)) } catch (e) { error.value = (e as Error).message } }, { immediate: true })
 async function save(data: CreateUserDto) {
   busy.value = true; error.value = ''
   const update: UpdateUserDto = { ...data }; if (!update.password) delete update.password
-  try { await store.update(Number(props.id), update); await router.push('/users') }
+  try { await store.updateUser(Number(props.id), update); await router.push('/users') }
   catch (e) { error.value = (e as Error).message } finally { busy.value = false }
 }
 </script>
