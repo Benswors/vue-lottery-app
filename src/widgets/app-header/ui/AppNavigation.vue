@@ -8,7 +8,7 @@ const { isAuthenticated } = storeToRefs(session)
 <template>
   <nav
     class="flex flex-wrap items-center gap-4 text-sm"
-    aria-label="Р“РѕР»РѕРІРЅР° РЅР°РІС–РіР°С†С–СЏ"
+    aria-label="Головна навігація"
   >
     <RouterLink
       to="/"

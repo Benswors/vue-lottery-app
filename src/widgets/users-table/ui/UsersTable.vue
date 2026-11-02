@@ -27,4 +27,116 @@ async function remove() {
 }
 function removeWinner(id: string) { winnerUsers.value = winnerUsers.value.filter(u => String(u.id) !== id) }
 </script>
-<template><WinnersList :winners="winners" :can-pick="canPick" @new-winner="store.pickWinner" @remove-winner="removeWinner" /><section class="panel"><div class="mb-3 flex flex-wrap items-center justify-between gap-3"><form class="flex flex-wrap items-center gap-2" @submit.prevent="navigate(1, search.trim())"><AppInput id="search" v-model="search" aria-label="Пошук учасників" placeholder="Search by name" type="search" class="!w-48" /><AppButton type="submit" size="sm">Search</AppButton></form><RouterLink to="/users/new" class="rounded bg-primary px-3 py-1.5 text-xs font-semibold text-white hover:bg-primary-dark">Register</RouterLink></div><p v-if="isLoading" role="status" class="text-sm text-gray-400">Loading…</p><div v-else-if="loadError" role="alert"><p class="form-error">{{ loadError }}</p><AppButton size="sm" @click="load">Повторити</AppButton></div><AppTable v-else :rows="users" :columns="columns"><template #number="{ index }">{{ (page - 1) * 10 + index + 1 }}</template><template #name="{ row }"><RouterLink :to="`/users/${row.id}`" class="hover:text-primary">{{ row.firstName }} {{ row.lastName }}</RouterLink></template><template #actions="{ row }"><div class="flex items-center gap-2"><RouterLink :to="`/users/${row.id}/edit`" class="inline-block whitespace-nowrap rounded bg-primary px-2.5 py-1 text-xs font-semibold text-white hover:bg-primary-dark">Редагувати дані</RouterLink><AppButton size="sm" variant="danger" @click="deleting = row; error = ''">Видалити учасника</AppButton></div></template></AppTable><div class="mt-4 flex items-center justify-between gap-2 text-xs text-gray-400"><AppButton size="sm" variant="secondary" :disabled="page <= 1 || isLoading" @click="navigate(page - 1)">Назад</AppButton><span>Сторінка {{ page }} / {{ pages }} · Усього {{ total }}</span><AppButton size="sm" variant="secondary" :disabled="page >= pages || isLoading" @click="navigate(page + 1)">Далі</AppButton></div></section><AppConfirmDialog :open="!!deleting" :loading="busy" @confirm="remove" @close="deleting = null"><p class="text-sm">Ви дійсно бажаєте видалити учасника "{{ deleting?.firstName }} {{ deleting?.lastName }}"?</p><p v-if="error" class="form-error" role="alert">{{ error }}</p></AppConfirmDialog></template>
+<template>
+  <WinnersList
+    :winners="winners"
+    :can-pick="canPick"
+    @new-winner="store.pickWinner"
+    @remove-winner="removeWinner"
+  /><section class="panel">
+    <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+      <form
+        class="flex flex-wrap items-center gap-2"
+        @submit.prevent="navigate(1, search.trim())"
+      >
+        <AppInput
+          id="search"
+          v-model="search"
+          aria-label="Пошук учасників"
+          placeholder="Search by name"
+          type="search"
+          class="!w-48"
+        /><AppButton
+          type="submit"
+          size="sm"
+        >
+          Search
+        </AppButton>
+      </form><RouterLink
+        to="/users/new"
+        class="rounded bg-primary px-3 py-1.5 text-xs font-semibold text-white hover:bg-primary-dark"
+      >
+        Register
+      </RouterLink>
+    </div><p
+      v-if="isLoading"
+      role="status"
+      class="text-sm text-gray-400"
+    >
+      Loading…
+    </p><div
+      v-else-if="loadError"
+      role="alert"
+    >
+      <p class="form-error">
+        {{ loadError }}
+      </p><AppButton
+        size="sm"
+        @click="load"
+      >
+        Повторити
+      </AppButton>
+    </div><AppTable
+      v-else
+      :rows="users"
+      :columns="columns"
+    >
+      <template #number="{ index }">
+        {{ (page - 1) * 10 + index + 1 }}
+      </template><template #name="{ row }">
+        <RouterLink
+          :to="`/users/${row.id}`"
+          class="hover:text-primary"
+        >
+          {{ row.firstName }} {{ row.lastName }}
+        </RouterLink>
+      </template><template #actions="{ row }">
+        <div class="flex items-center gap-2">
+          <RouterLink
+            :to="`/users/${row.id}/edit`"
+            class="inline-block whitespace-nowrap rounded bg-primary px-2.5 py-1 text-xs font-semibold text-white hover:bg-primary-dark"
+          >
+            Редагувати дані
+          </RouterLink><AppButton
+            size="sm"
+            variant="danger"
+            @click="deleting = row; error = ''"
+          >
+            Видалити учасника
+          </AppButton>
+        </div>
+      </template>
+    </AppTable><div class="mt-4 flex items-center justify-between gap-2 text-xs text-gray-400">
+      <AppButton
+        size="sm"
+        variant="secondary"
+        :disabled="page <= 1 || isLoading"
+        @click="navigate(page - 1)"
+      >
+        Назад
+      </AppButton><span>Сторінка {{ page }} / {{ pages }} · Усього {{ total }}</span><AppButton
+        size="sm"
+        variant="secondary"
+        :disabled="page >= pages || isLoading"
+        @click="navigate(page + 1)"
+      >
+        Далі
+      </AppButton>
+    </div>
+  </section><AppConfirmDialog
+    :open="!!deleting"
+    :loading="busy"
+    @confirm="remove"
+    @close="deleting = null"
+  >
+    <p class="text-sm">
+      Ви дійсно бажаєте видалити учасника "{{ deleting?.firstName }} {{ deleting?.lastName }}"?
+    </p><p
+      v-if="error"
+      class="form-error"
+      role="alert"
+    >
+      {{ error }}
+    </p>
+  </AppConfirmDialog>
+</template>

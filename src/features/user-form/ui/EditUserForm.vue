@@ -18,7 +18,7 @@ async function save(data: CreateUserDto) {
 <template>
   <section class="panel">
     <h2 class="panel-title">
-      Р РµРґР°РіСѓРІР°РЅРЅСЏ СѓС‡Р°СЃРЅРёРєР°
+      Редагування учасника
     </h2><p
       v-if="error"
       class="form-error"
@@ -36,7 +36,7 @@ async function save(data: CreateUserDto) {
       class="text-sm text-gray-400"
       role="status"
     >
-      LoadingвЂ¦
+      Loading…
     </p>
   </section>
 </template>

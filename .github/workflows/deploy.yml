@@ -1,7 +1,7 @@
-name: Deploy to gh-pages
+name: Check and publish FSD version
 on:
   push:
-    branches: [feature/routing]
+    branches: [feature/fsd]
   workflow_dispatch:
 permissions:
   contents: write
@@ -9,22 +9,27 @@ concurrency:
   group: gh-pages
   cancel-in-progress: true
 jobs:
-  build-and-deploy:
+  check-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - run: npm run lint:fsd
+      - run: npm run test:fsd
       - run: npm run build
         env:
-          VITE_API_URL: ${{ vars.VITE_API_URL || 'https://dummyjson.com' }}
-          VITE_BASE_PATH: /vue-lottery-app/
-      - name: Publish gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+          VITE_API_URL: https://dummyjson.com
+          VITE_BASE_PATH: /vue-lottery-app/lab-06/
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          destination_dir: lab-06
+          keep_files: true
