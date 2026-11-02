@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { AppNotifications } from '@/shared/ui'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import DefaultLayout from './layouts/DefaultLayout.vue'
@@ -9,5 +10,5 @@ const layout = computed(() => route.meta.layout === 'auth' ? AuthLayout : Defaul
 <template>
   <component :is="layout">
     <RouterView />
-  </component>
+  </component><AppNotifications />
 </template>
