@@ -4,8 +4,8 @@ import { BaseButton } from '@/shared/ui'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '@/entities/session'
-const auth = useAuthStore(), route = useRoute(), router = useRouter(), error = ref('')
+import { useSessionStore } from '@/entities/session'
+const auth = useSessionStore(), route = useRoute(), router = useRouter(), error = ref('')
 const { defineField, errors, handleSubmit, isSubmitting } = useForm({
   validationSchema: yup.object({ username: yup.string().trim().required('Вкажіть логін'), password: yup.string().min(6, 'Мінімум 6 символів').required('Вкажіть пароль') }),
   initialValues: { username: '', password: '' },

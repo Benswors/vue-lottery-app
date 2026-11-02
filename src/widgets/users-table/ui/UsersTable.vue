@@ -12,17 +12,17 @@ const query = computed(() => typeof route.query.q === 'string' ? route.query.q :
 const search = ref(query.value), deleting = ref<User | null>(null), busy = ref(false), error = ref('')
 const pages = computed(() => Math.max(1, Math.ceil(store.total / 10)))
 const winners = computed(() => store.winners.map(u => ({ id: String(u.id), name: `${u.firstName} ${u.lastName}`, email: u.email, phone: u.phone, birthDate: u.birthDate || '' })))
-const canPick = computed(() => !store.loading && store.winners.length < 3 && store.rows.some(u => !store.winners.some(w => w.id === u.id)))
+const canPick = computed(() => !store.isLoading && store.winners.length < 3 && store.users.some(u => !store.winners.some(w => w.id === u.id)))
 async function navigate(next: number, q = query.value) { await router.push({ name: 'users', query: { ...(next > 1 ? { page: String(next) } : {}), ...(q ? { q } : {}) } }) }
 async function load() {
-  await store.load(page.value, query.value)
+  await store.fetchUsers(page.value, query.value)
   if (!store.error && page.value > pages.value) await navigate(pages.value)
 }
 watch([page, query], () => { search.value = query.value; void load() }, { immediate: true })
 async function remove() {
   if (!deleting.value) return
   busy.value = true; error.value = ''
-  try { await store.remove(deleting.value.id); deleting.value = null; await load() }
+  try { await store.removeUser(deleting.value.id); deleting.value = null; await load() }
   catch (e) { error.value = (e as Error).message } finally { busy.value = false }
 }
 function removeWinner(id: string) { store.winners = store.winners.filter(u => String(u.id) !== id) }
@@ -63,7 +63,7 @@ function removeWinner(id: string) { store.winners = store.winners.filter(u => St
       </RouterLink>
     </div>
     <p
-      v-if="store.loading"
+      v-if="store.isLoading"
       role="status"
       class="text-sm text-gray-400"
     >
@@ -102,7 +102,7 @@ function removeWinner(id: string) { store.winners = store.winners.filter(u => St
           </tr>
         </thead><tbody>
           <tr
-            v-for="(user, index) in store.rows"
+            v-for="(user, index) in store.users"
             :key="user.id"
             class="border-b border-gray-100 text-gray-500"
           >
@@ -137,7 +137,7 @@ function removeWinner(id: string) { store.winners = store.winners.filter(u => St
                 Видалити учасника
               </BaseButton>
             </td>
-          </tr><tr v-if="!store.rows.length">
+          </tr><tr v-if="!store.users.length">
             <td
               colspan="7"
               class="px-2 py-4 text-center text-gray-400"
@@ -152,14 +152,14 @@ function removeWinner(id: string) { store.winners = store.winners.filter(u => St
       <BaseButton
         size="sm"
         variant="secondary"
-        :disabled="page <= 1 || store.loading"
+        :disabled="page <= 1 || store.isLoading"
         @click="navigate(page - 1)"
       >
         Назад
       </BaseButton><span>Сторінка {{ page }} / {{ pages }} · Усього {{ store.total }}</span><BaseButton
         size="sm"
         variant="secondary"
-        :disabled="page >= pages || store.loading"
+        :disabled="page >= pages || store.isLoading"
         @click="navigate(page + 1)"
       >
         Далі

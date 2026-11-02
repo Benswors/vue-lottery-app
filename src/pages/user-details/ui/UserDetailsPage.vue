@@ -8,7 +8,7 @@ const route = useRoute(), store = useUsersStore(), user = ref<User>(), error = r
 let ticket = 0
 watch(() => props.id, async id => {
   const current = ++ticket; loading.value = true; error.value = ''; user.value = undefined
-  try { const result = await store.get(Number(id)); if (current === ticket) user.value = result }
+  try { const result = await store.fetchUser(Number(id)); if (current === ticket) user.value = result }
   catch (e) { if (current === ticket) error.value = (e as Error).message }
   finally { if (current === ticket) loading.value = false }
 }, { immediate: true })
