@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import { useSessionStore } from '@/entities/session'
-import { BaseButton } from '@/shared/ui'
-const auth = useSessionStore(), router = useRouter()
-async function logout() { auth.clearSession(); await router.replace('/login') }
+import { LogoutButton } from '@/features/auth'
+const session = useSessionStore()
+const { isAuthenticated } = storeToRefs(session)
 </script>
 <template>
   <nav
     class="flex flex-wrap items-center gap-4 text-sm"
-    aria-label="Головна навігація"
+    aria-label="Р“РѕР»РѕРІРЅР° РЅР°РІС–РіР°С†С–СЏ"
   >
     <RouterLink
       to="/"
@@ -31,14 +31,7 @@ async function logout() { auth.clearSession(); await router.replace('/login') }
     >
       Users
     </RouterLink>
-    <BaseButton
-      v-if="auth.isAuthenticated"
-      size="sm"
-      variant="secondary"
-      @click="logout"
-    >
-      Logout
-    </BaseButton>
+    <LogoutButton v-if="isAuthenticated" />
     <RouterLink
       v-else
       to="/login"
