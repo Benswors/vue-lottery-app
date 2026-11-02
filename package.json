@@ -11,7 +11,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@primeuix/themes": "^3.1.0",
     "pinia": "^4.1.0",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "primevue": "^4.5.5",
     "vee-validate": "^4.15.1",
     "vue": "^3.5.43",
     "vue-router": "^4.6.4",
@@ -19,10 +22,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "@vitejs/plugin-vue": "^6.0.10",
     "autoprefixer": "^10.6.1",
     "eslint": "^10.12.0",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-boundaries": "^5.4.0",
     "eslint-plugin-vue": "^10.11.1",
     "globals": "^17.13.0",
     "postcss": "^8.5.29",
