@@ -1,4 +1,4 @@
-import { http } from '@/shared/api'
+import { createServiceKey, http } from '@/shared/api'
 import type { User, CreateUserDto, UpdateUserDto, UsersResponse } from '../model/types'
 import type { Readable, Creatable, Editable, Deletable } from '@/shared/api'
 export class UserService implements Readable<User>, Creatable<User, CreateUserDto>, Editable<User, UpdateUserDto>, Deletable<User> {
@@ -13,3 +13,5 @@ export class UserService implements Readable<User>, Creatable<User, CreateUserDt
   update(id: number, data: UpdateUserDto) { return http<User>(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }) }
   delete(id: number) { return http<User>(`/users/${id}`, { method: 'DELETE' }) }
 }
+
+export const USER_SERVICE = createServiceKey<UserService>('users')
