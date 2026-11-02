@@ -62,16 +62,16 @@ function isEmailTakenByOther(email: string): boolean {
     />
     <section class="rounded border border-gray-200 bg-white p-4 shadow-sm">
       <h2 class="mb-2 text-sm font-bold uppercase text-gray-900">
-        РџСЂРѕ Р·Р°СЃС‚РѕСЃСѓРЅРѕРє
+        Про застосунок
       </h2>
       <p class="mb-3 text-sm text-gray-500">
-        Lottery вЂ” Р·Р°СЃС‚РѕСЃСѓРЅРѕРє РґР»СЏ СЂРµС”СЃС‚СЂР°С†С–С— СѓС‡Р°СЃРЅРёРєС–РІ С– РІРёРїР°РґРєРѕРІРѕРіРѕ РІРёР±РѕСЂСѓ РїРµСЂРµРјРѕР¶С†С–РІ.
-        РЈ СЂРѕР·РґС–Р»С– Users РјРѕР¶РЅР° С€СѓРєР°С‚Рё РєРѕСЂРёСЃС‚СѓРІР°С‡С–РІ, РїРµСЂРµРіР»СЏРґР°С‚Рё С—С…РЅС– РїСЂРѕС„С–Р»С–,
-        РґРѕРґР°РІР°С‚Рё, СЂРµРґР°РіСѓРІР°С‚Рё С‚Р° РІРёРґР°Р»СЏС‚Рё Р·Р°РїРёСЃРё РїС–СЃР»СЏ РІС…РѕРґСѓ.
+        Lottery — застосунок для реєстрації учасників і випадкового вибору переможців.
+        У розділі Users можна шукати користувачів, переглядати їхні профілі,
+        додавати, редагувати та видаляти записи після входу.
       </p>
       <p class="mb-3 text-sm text-gray-500">
-        РўРµС…РЅРѕР»РѕРіС–С—: Vue 3, TypeScript, Composition API, Vue Router, Pinia,
-        VeeValidate, yup, Tailwind CSS, SCSS С‚Р° REST API DummyJSON.
+        Технології: Vue 3, TypeScript, Composition API, Vue Router, Pinia,
+        VeeValidate, yup, Tailwind CSS, SCSS та REST API DummyJSON.
       </p>
       <a
         href="https://github.com/Benswors/vue-lottery-app"
@@ -79,7 +79,7 @@ function isEmailTakenByOther(email: string): boolean {
         target="_blank"
         rel="noopener noreferrer"
       >
-        GitHub РїСЂРѕС”РєС‚Сѓ
+        GitHub проєкту
       </a>
     </section>
   </div>
@@ -89,13 +89,13 @@ function isEmailTakenByOther(email: string): boolean {
     @close="isEditOpen = false"
   >
     <template #header>
-      Р РµРґР°РіСѓРІР°РЅРЅСЏ СѓС‡Р°СЃРЅРёРєР°
+      Редагування учасника
     </template>
     <ParticipantForm
       v-if="editingParticipant"
       :key="editingParticipant.id"
       :initial-values="editingParticipant"
-      submit-label="РћРЅРѕРІРёС‚Рё РґР°РЅС–"
+      submit-label="Оновити дані"
       :is-email-taken="isEmailTakenByOther"
       @submit="submitEdit"
     />
@@ -106,24 +106,24 @@ function isEmailTakenByOther(email: string): boolean {
     @close="isDeleteOpen = false"
   >
     <template #header>
-      Р’РёРґР°Р»РµРЅРЅСЏ СѓС‡Р°СЃРЅРёРєР°
+      Видалення учасника
     </template>
     <p
       v-if="deletingParticipant"
       class="text-sm"
     >
-      Р’Рё РґС–Р№СЃРЅРѕ Р±Р°Р¶Р°С”С‚Рµ РІРёРґР°Р»РёС‚Рё СѓС‡Р°СЃРЅРёРєР° "{{ deletingParticipant.name }}",
+      Ви дійсно бажаєте видалити учасника "{{ deletingParticipant.name }}",
       "{{ deletingParticipant.email }}"?
     </p>
     <template #footer>
       <BaseButton @click="confirmDelete">
-        РўР°Рє
+        Так
       </BaseButton>
       <BaseButton
         variant="secondary"
         @click="isDeleteOpen = false"
       >
-        РќС–
+        Ні
       </BaseButton>
     </template>
   </BaseModal>

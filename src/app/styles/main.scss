@@ -28,7 +28,8 @@ body {
   .bg-white { @apply bg-gray-900; }
   .bg-gray-50, .bg-gray-100 { @apply bg-gray-800; }
   .text-gray-900, .text-gray-800 { @apply text-gray-100; }
-  .text-gray-500, .text-gray-400 { @apply text-gray-400; }
+  .text-gray-500, .text-gray-400 { color: #9ca3af; }
   .border-gray-200, .border-gray-100 { @apply border-gray-700; }
-  .form-input { @apply bg-gray-800 text-gray-100 border-gray-600; }
+  .form-input, .p-inputtext { background: #1f2937; color: #f3f4f6; border-color: #4b5563; }
 }
+

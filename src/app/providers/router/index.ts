@@ -12,9 +12,9 @@ export const router = createRouter({
     { path: '/login', name: 'login', component: () => import('@/pages/login').then(module => module.LoginPage), meta: { title: 'Login', layout: 'auth' } },
     { path: '/users', meta: { requiresAuth: true }, component: () => import('@/pages/users').then(module => module.UsersLayout), children: [
       { path: '', name: 'users', component: () => import('@/pages/users').then(module => module.UsersPage), meta: { title: 'Users' } },
-      { path: 'new', name: 'user-create', component: () => import('@/pages/user-create').then(module => module.UserCreatePage), meta: { title: 'РќРѕРІРёР№ СѓС‡Р°СЃРЅРёРє' } },
-      { path: ':id', props: true, component: () => import('@/pages/user-details').then(module => module.UserDetailsPage), meta: { title: 'РџСЂРѕС„С–Р»СЊ СѓС‡Р°СЃРЅРёРєР°' }, children: [
-        { path: 'edit', name: 'user-edit', props: true, component: () => import('@/pages/user-edit').then(module => module.UserEditPage), meta: { title: 'Р РµРґР°РіСѓРІР°РЅРЅСЏ СѓС‡Р°СЃРЅРёРєР°' } },
+      { path: 'new', name: 'user-create', component: () => import('@/pages/user-create').then(module => module.UserCreatePage), meta: { title: 'Новий учасник' } },
+      { path: ':id', props: true, component: () => import('@/pages/user-details').then(module => module.UserDetailsPage), meta: { title: 'Профіль учасника' }, children: [
+        { path: 'edit', name: 'user-edit', props: true, component: () => import('@/pages/user-edit').then(module => module.UserEditPage), meta: { title: 'Редагування учасника' } },
       ] },
     ] },
     { path: '/:pathMatch(.*)*', component: () => import('@/pages/not-found').then(module => module.NotFoundPage), meta: { title: '404' } },

@@ -5,4 +5,12 @@ import { AppButton } from '@/shared/ui'
 const session = useSessionStore(), router = useRouter()
 async function logout() { session.clearSession(); await router.replace('/login') }
 </script>
-<template><AppButton size="sm" variant="secondary" @click="logout">Logout</AppButton></template>
+<template>
+  <AppButton
+    size="sm"
+    variant="secondary"
+    @click="logout"
+  >
+    Logout
+  </AppButton>
+</template>

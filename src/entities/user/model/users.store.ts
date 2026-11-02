@@ -24,10 +24,10 @@ export const useUsersStore = defineStore('users', () => {
     finally { if (ticket === requestId) isLoading.value = false }
   }
   async function fetchUser(id: number) {
-    if (deleted.value.includes(id)) throw new Error('Р С™Р С•РЎР‚Р С‘РЎРѓРЎвЂљРЎС“Р Р†Р В°РЎвЂЎР В° Р Р†Р С‘Р Т‘Р В°Р В»Р ВµР Р…Р С• Р Р† РЎвЂ РЎвЂ“Р в„– РЎРѓР ВµРЎРѓРЎвЂ“РЎвЂ”')
+    if (deleted.value.includes(id)) throw new Error('Користувача видалено в цій сесії')
     const local = created.value.find(u => u.id === id) || changed.value[id]
     if (local) return local
-    if (!Number.isInteger(id) || id <= 0) throw new Error('Р СњР ВµР С”Р С•РЎР‚Р ВµР С”РЎвЂљР Р…Р С‘Р в„– ID Р С”Р С•РЎР‚Р С‘РЎРѓРЎвЂљРЎС“Р Р†Р В°РЎвЂЎР В°')
+    if (!Number.isInteger(id) || id <= 0) throw new Error('Некоректний ID користувача')
     return ServiceProvider.get(USER_SERVICE).getById(id)
   }
   async function createUser(data: CreateUserDto) {
