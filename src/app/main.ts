@@ -5,6 +5,8 @@ import { router } from './providers/router/index'
 import { useAuthStore } from '@/entities/session'
 import { configureAuth } from '@/shared/api'
 import './styles/main.scss'
+import { registerServices } from './providers/services'
+registerServices()
 const app = createApp(App).use(pinia)
 const auth = useAuthStore(pinia)
 configureAuth({ access: () => auth.accessToken, refresh: () => auth.refreshToken, save: auth.save, clear: auth.logout })

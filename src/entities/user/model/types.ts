@@ -16,5 +16,3 @@ export interface User {
 export type CreateUserDto = Pick<User, 'firstName' | 'lastName' | 'email' | 'username' | 'age' | 'gender' | 'phone'> & { password: string }
 export type UpdateUserDto = Partial<CreateUserDto>
 export interface UsersResponse { users: User[]; total: number; skip: number; limit: number }
-export interface Tokens { accessToken: string; refreshToken: string }
-export type AuthResponse = User & Tokens

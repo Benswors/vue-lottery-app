@@ -1,4 +1,4 @@
-import type { Tokens } from '@/entities/user'
+import type { Tokens } from './types'
 export class HttpError extends Error {
   constructor(public status: number, message: string) { super(message) }
 }
@@ -13,7 +13,7 @@ let refreshing: Promise<void> | null = null
 export function configureAuth(bridge: AuthBridge) { auth = bridge }
 async function request<T>(path: string, options: RequestInit, protectedRequest: boolean): Promise<T> {
   const base = import.meta.env.VITE_API_URL?.replace(/\/$/, '')
-  if (!base) throw new Error('Налаштуйте VITE_API_URL у файлі .env')
+  if (!base) throw new Error('РќР°Р»Р°С€С‚СѓР№С‚Рµ VITE_API_URL Сѓ С„Р°Р№Р»С– .env')
   const headers = new Headers(options.headers)
   if (options.body) headers.set('Content-Type', 'application/json')
   if (protectedRequest && auth?.access()) headers.set('Authorization', `Bearer ${auth.access()}`)
